@@ -1,7 +1,7 @@
 <?php
 
 use Faker\Generator as Faker;
-
+use App\Company;
 /*
 |--------------------------------------------------------------------------
 | Model Factories
@@ -12,15 +12,13 @@ use Faker\Generator as Faker;
 | model instances for testing / seeding your application's database.
 |
 */
-$factory->define(App\Company::class, function (Faker $faker) {
-
-    $filepath = public_path('upload/image/');
+$factory->define(App\Employee::class, function (Faker $faker) {
 
     return [
-        'name'      => $faker->name,
-        'email'     => $faker->unique()->safeEmail,
-        'address'   => $faker->address,
-        'website'   => $faker->name,
-        'logo'      => $faker->image($filepath,300,300),
+        'company_id'  => Company::all()->random()->id,
+        'name'        => $faker->name,
+        'last_name'   => $faker->name,
+        'email'       => $faker->unique()->safeEmail,
+        'phone'       => $faker->phoneNumber,
     ];
 });

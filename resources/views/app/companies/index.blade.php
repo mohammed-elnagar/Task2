@@ -3,6 +3,7 @@
 
 <div class="container">
     <h3>All Companies</h3>
+    <a href="{{route('companies.create')}}" class="btn btn-primary mb-3"> Add new company</a>
     <div class="row justify-content-center">
         <table class="table">
           <thead>
@@ -10,7 +11,7 @@
               <th scope="col">#</th>
               <th scope="col">Name</th>
               <th scope="col">Address</th>
-              <th scope="col">Logo</th>
+              <!-- <th scope="col">Logo</th> -->
               <th scope="col">Controle</th>
             </tr>
           </thead>
@@ -20,9 +21,16 @@
                   <th scope="row">{{$company->id}}</th>
                   <td>{{$company->name}}</td>
                   <td>{{$company->address}}</td>
-                  <td>{{$company->logo}}</td>
-                  <td><button class="btn btn-warning">Edit </td>
-                  <td><button class="btn btn-danger">Delete </td>
+                  <!-- <td>{{$company->logo}}</td> -->
+                  <td><a href="{{route('companies.show', $company->id)}}" class="btn btn-primary btn-sm">Show</a>
+                  <a href="{{route('companies.edit', $company->id)}}" class="btn btn-warning btn-sm">Edit</a>
+                        <form class="" action="{{route('companies.destroy', $company->id)}}" method="post">
+                            {{csrf_field()}}
+                            <input type="hidden" name="_method" value="DELETE">
+                            <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                        </form>
+                   </td>
+
                 </tr>
             @endforeach
             <tr>

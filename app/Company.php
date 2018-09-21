@@ -12,6 +12,6 @@ class Company extends Model
     ];
 
     public function employee(){
-        return $this->hasMany(Employee::class);
+        return $this->hasMany(Employee::class, 'company_id')->paginate(2);
     }
 }
