@@ -2,6 +2,7 @@
 @section('content')
 
 <div class="container">
+    <a href="{{route('companies.index')}}" class="btn btn-primary mb-4">List Companies</a>
     <div class="row">
         <div class="card card-body">
             <h2>Name - {{$company->name}}</h2>
@@ -12,9 +13,9 @@
                 <img src="{{url('/upload/image') .'/' .$company->logo}}" style="width:100%; height:100%"alt="">
             </div>
             <div class="">
-
+                <h3>Employees for company</h3>
+                <hr>
                 @foreach($company->employee() as $employee)
-                {{$employee->id}}
                 <h2>Name - {{$employee->name}}</h2>
                 <h5>Last_name - {{$employee->last_name}}</h5>
                 <h5>Email - {{$employee->email}}</h5>

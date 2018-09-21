@@ -3,7 +3,7 @@
 
 <div class="container">
     <h3>All Employeess</h3>
-    <a href="{{route('employees.create')}}" class="btn btn-primary mb-3"> Add new company</a>
+    <a href="{{route('employees.create')}}" class="btn btn-primary mb-3"> Add new employee</a>
     <div class="row justify-content-center">
         <table class="table">
           <thead>
@@ -24,7 +24,7 @@
                   <td>{{$employee->last_name}}</td>
                   <td><a href="{{route('employees.show', $employee->id)}}" class="btn btn-primary btn-sm">Show</a>
                   <a href="{{route('employees.edit', $employee->id)}}" class="btn btn-warning btn-sm">Edit</a>
-                        <form class="" action="{{route('employees.destroy', $employee->id)}}" method="post">
+                        <form class="" style="display: inline-block;"action="{{route('employees.destroy', $employee->id)}}" method="post">
                             {{csrf_field()}}
                             <input type="hidden" name="_method" value="DELETE">
                             <button type="submit" class="btn btn-danger btn-sm">Delete</button>

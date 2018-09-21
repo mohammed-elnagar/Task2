@@ -52,7 +52,7 @@ class EmployeesController extends Controller
                  ];
 
          $validation = Validator::make($data,$rules);
-
+         dd($validation);
          if($validation->fails()){
              return redirect()->back()->withErrors($validation);
          }
@@ -87,10 +87,10 @@ class EmployeesController extends Controller
     public function edit($id)
     {
         //
+        $employee  = Employee::find($id);
         $companies = Company::get(['id', 'name']);
-        $employee = Employee::find($id);
         if($employee){
-            return view('app.employees.create', compact('companies', 'employee'));
+            return view('app.employees.create', compact('employee', 'companies'));
         }
     }
 
@@ -119,9 +119,16 @@ class EmployeesController extends Controller
         if($validation->fails()){
             return redirect()->back()->withErrors($validation);
         }
-
-        Employee::create($request->all());
-        return redirect()->back()->with('alert-success', 'Your data has been inserted');
+        $employee = Employee::find($id);
+        if($employee){
+            $employee->company_id    = $request->company_id;
+            $employee->name          = $request->name;
+            $employee->last_name     = $request->last_name;
+            $employee->email         = $request->email;
+            $employee->phone         = $request->phone;
+            $employee->update();
+        }
+        return redirect()->back()->with('alert-success', 'Your data has been updated');
     }
 
     /**
@@ -133,5 +140,12 @@ class EmployeesController extends Controller
     public function destroy($id)
     {
         //
+        $employee = Employee::find($id);
+        if($employee){
+            $employee->delete();
+            return redirect()->back()->with('alert-success', 'Your data has been deleted');
+        }else {
+            return redirect()->back()->with('alert-danger', 'Your data not found');
+        }
     }
 }

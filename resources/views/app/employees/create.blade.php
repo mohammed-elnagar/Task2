@@ -10,9 +10,9 @@
             {{csrf_field()}}
             <div class="form-group">
               <label for="exampleFormControlSelect1">Select company</label>
-              <select class="form-control" id="exampleFormControlSelect1" name="employee_id">
-                  @foreach($companies as $employee)
-                    <option value="{{$employee->id}}">{{$employee->name}}</option>
+              <select class="form-control" id="exampleFormControlSelect1" name="company_id">
+                  @foreach($companies as $company)
+                    <option value="{{$company->id}}">{{$company->name}}</option>
                   @endforeach
               </select>
             </div>
@@ -27,8 +27,8 @@
               @endif
             </div>
             <div class="form-group">
-              <label for="name">LastName</label>
-              <input type="text" name="last_name" class="form-control" id="LastName"  placeholder="Last Name" value="{{isset($employee) ? $employee->last_name : 'test'}}">
+              <label for="last_name">LastName</label>
+              <input type="text" name="last_name" class="form-control" id="last_name"  placeholder="Last Name" value="{{isset($employee) ? $employee->last_name : ''}}">
               @if ($errors->has('last_name'))
                   <div class="form-control-feedback">{{ $errors->first('last_name') }}</div>
               @endif
